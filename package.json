@@ -1,0 +1,59 @@
+{
+  "name": "cktheme",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "now-start": "preact serve",
+    "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
+    "build": "preact build --no-prerender",
+    "serve": "preact build --no-prerender && preact serve",
+    "dev": "preact watch",
+    "test": "eslint src && preact test"
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-synacor",
+    "rules": {
+      "indent": [
+        "warn",
+        2
+      ],
+      "brace-style": [
+        "warn",
+        "1tbs"
+      ],
+      "comma-dangle": [
+        "warn",
+        "only-multiline"
+      ],
+      "react/jsx-indent-props": 0,
+      "react/jsx-closing-bracket-location": 0,
+      "react/prefer-stateless-function": 0
+    }
+  },
+  "now": {
+    "name": "cktheme",
+    "alias": "cktheme"
+  },
+  "devDependencies": {
+    "eslint": "^4.4.1",
+    "eslint-config-synacor": "^1.0.2",
+    "if-env": "^1.0.0",
+    "preact-cli": "^1.4.1"
+  },
+  "dependencies": {
+    "@blueprintjs/core": "^1.24.0",
+    "decko": "^1.2.0",
+    "json5": "^0.5.1",
+    "lodash": "^4.17.4",
+    "preact": "^8.2.1",
+    "preact-compat": "^3.17.0",
+    "preact-css-transition-group": "^1.3.0",
+    "react-color": "^2.13.4",
+    "react-redux": "^5.0.5",
+    "react-virtualized": "^9.9.0",
+    "redux": "^3.7.2",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.2.0"
+  }
+}
