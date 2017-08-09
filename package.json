@@ -44,7 +44,9 @@
   },
   "dependencies": {
     "@blueprintjs/core": "^1.24.0",
+    "babel-plugin-async-to-promises": "^1.0.5",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-transform-regenerator": "^6.24.1",
     "decko": "^1.2.0",
     "js-base64": "^2.1.9",
     "json5": "^0.5.1",
@@ -58,6 +60,7 @@
     "react-virtualized": "^9.9.0",
     "redux": "^3.7.2",
     "redux-promise": "^0.5.3",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "regenerator-runtime": "^0.10.5"
   }
 }
