@@ -1,0 +1,98 @@
+.root {
+  padding: 0 10px 10px;
+  @media (max-width: 420px) {
+    padding: 0 5px 10px;
+    :global(> .pt-tab-list) {
+      padding: 0 5px;
+    }
+  }
+}
+
+// 하위 컨트롤러
+
+.childRoot {
+  position: relative;
+}
+
+.toolbar {
+  text-align: right;
+  > * {
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .edtValue > input {
+    font-size: 16px;
+  }
+}
+
+.error {
+  margin-bottom: 10px;
+}
+
+textarea.textarea,
+textarea.code {
+  display: block;
+  height: 80%;
+  margin-bottom: 10px;
+  line-height: 13px;
+  font-family: consolas, "malgun gothic", monospace;
+  word-break: break-all;
+  white-space: pre-wrap;
+  font-size: 11px;
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    font-size: 16px;
+  }
+}
+
+// (편집 탭)
+.btnColor {
+  display: block;
+  color: inherit;
+  &:hover {
+    text-decoration: none;
+  }
+}
+.swatch {
+  display: inline-block;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgba(16, 22, 26, 0.15);
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin: 0 5px;
+}
+
+:global(table.pt-table.pt-condensed) {
+  .tiny {
+    padding-top: 5px;
+    padding-bottom: 0;
+  }
+}
+
+.colorInput input {
+  height: 20px;
+  marginTop: 5px;
+}
+.backCover {
+  // 피커 닫기용 레이어
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+.absolute {
+  // 피커 위치조정용 레이어
+  position: absolute;
+  z-index: 5;
+}
