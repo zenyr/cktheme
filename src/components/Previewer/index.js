@@ -1,4 +1,4 @@
-import { h, Component } from 'preact';
+import { Component } from 'preact';
 import { connect } from '../../duck';
 import { bind } from 'decko';
 

@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import Item from './Read.Item';
 import styles from './style.less';
 
@@ -12,7 +11,7 @@ export default ({ colors }) =>
     </div>
     <div
       className={styles.info}
-      style={`border-bottom-color:${colors.paperLine};color:${colors.date};`}
+      style={`border-bottom-color:${colors.paperLine};color:${colors.time};`}
     >
       <div className={styles.name} style={`color:${colors.name};`}>
         목과머리의탈거
@@ -21,7 +20,7 @@ export default ({ colors }) =>
       <div className={styles.div}>·</div>
       <div className={styles.count}>88</div>
     </div>
-    <div className={styles.text}>
+    <div className={styles.text} style={`color:${colors.paperText};`}>
       피에 찬미를 커다란 보내는 얼음 풀이 그들의 아니다. 이 가진 피고 기쁘며, 얼마나 이상의 원대하고, 끓는다.{'\n\n'}
       대한 때까지 천하를 희망의 군영과 끓는 원대하고, 이 때문이다. 길을 웅대한 그들의 이상이 것이다. 불어 같지 간에 못할 그러므로
       굳세게 우리 타오르고 사막이다. 현저하게 품었기 인생의 할지라도 있는 든 낙원을 웅대한 것이다. 생명을 이상은 대고, 온갖 살았으며,

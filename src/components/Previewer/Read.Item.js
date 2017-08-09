@@ -1,4 +1,4 @@
-import { h, Component } from 'preact';
+import { Component } from 'preact';
 import styles from './style.less';
 
 export default class Item extends Component {
@@ -21,7 +21,7 @@ export default class Item extends Component {
           >
             {name}
           </div>
-          <div className={styles.date} style={`color:${colors.date}`}>
+          <div className={styles.date} style={`color:${colors.time}`}>
             {date}
           </div>
           {!!like &&

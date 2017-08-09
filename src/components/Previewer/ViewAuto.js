@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import ViewList from './ViewList';
 import ViewRead from './ViewRead';
 import ViewMenu from './ViewMenu';

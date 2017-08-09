@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import styles from './style.less';
 import { cz } from '../../lib/util';
 

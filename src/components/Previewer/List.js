@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import Item from './List.Item';
 import styles from './style.less';
 
@@ -47,6 +46,7 @@ export default ({ colors }) =>
     />
     <Item
       title="모든 국민은 신속한 재판을 받을 권리를 가진다. 형사피고인은 상당한 이유가 없는 한 지체없이 공개재판을"
+      category="생활상식"
       name="내꺼야"
       comment={0}
       recommend={1}
@@ -85,7 +85,7 @@ export default ({ colors }) =>
     <Item
       title="제1항의 탄핵소추는 국회재적의원 3분의 1 이상의 발의가 있어야 하며, 그 의결은 국회재적의원 과반수의 ..."
       name="길라임"
-      comment={11}
+      comment={18}
       recommend={0}
       time="10:07"
       count={1234}

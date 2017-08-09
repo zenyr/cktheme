@@ -1,4 +1,4 @@
-import { h, Component } from 'preact';
+import { Component } from 'preact';
 import styles from './style.less';
 import { cz } from '../../lib/util';
 
@@ -34,6 +34,7 @@ export default class Item extends Component {
     commentActive,
     recommend,
     recommendActive,
+    category,
     read,
     mine,
     time,
@@ -53,6 +54,13 @@ export default class Item extends Component {
               ? colors.paperAltText
               : mine ? colors.highlightedText : colors.paperText}`}
           >
+            {!!category &&
+              <div
+                className={styles.category}
+                style={`color:${colors.categoryText};background-color:${colors.category};`}
+              >
+                {category}
+              </div>}
             {title}
           </div>
           {!!comment &&
