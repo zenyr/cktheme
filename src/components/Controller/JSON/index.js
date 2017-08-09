@@ -67,20 +67,17 @@ export default class JSONController extends Component {
           <Switch
             checked={loose}
             label="JSON5"
-            className="pt-large"
             onChange={this.handleLooseToggle}
           />
           <Switch
             checked={pretty}
             label="줄바꿈"
-            className="pt-large"
             onChange={this.handlePrettyToggle}
           />
           <Switch
             checked={base64}
             disabled={!btoa}
             label="공유 코드"
-            className="pt-large"
             onChange={this.handleBtoaToggle}
           />
         </div>

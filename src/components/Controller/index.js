@@ -12,7 +12,7 @@ export default class Controller extends Component {
   render({ float, toggleFloat }) {
     return (
       <Tabs2
-        className={cz(['pt-large', styles.root])}
+        className={cz([styles.root])}
         id="controller"
         onChange={this.handleTabChange}
       >

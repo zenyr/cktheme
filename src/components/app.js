@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { FocusStyleManager, NonIdealState } from '@blueprintjs/core';
+import { PortalProvider, WhitePortal } from 'react-native-portal';
 import { bind } from 'decko';
 import '@blueprintjs/core/dist/blueprint.css';
 import Header from './header';
@@ -20,34 +21,38 @@ export default class App extends Component {
   }
   render({}, { float }) {
     return (
-      <Provider store={store}>
-        <div id="app" className={float ? styles.float : ''}>
-          <Header />
-          <div className={styles.row}>
-            <div
-              className={cz([
-                'pt-card pt-elevation-1',
-                styles.col,
-                styles.preview
-              ])}
-            >
-              <Previewer />
+      <PortalProvider>
+        <Provider store={store}>
+          <div id="app" className={float ? styles.float : ''}>
+            <Header />
+            <div className={styles.row}>
+              <div
+                className={cz([
+                  'pt-card pt-elevation-1',
+                  styles.col,
+                  styles.controller
+                ])}
+              >
+                <Controller float={float} toggleFloat={this.toggleFloat} />
+              </div>
+              <div
+                className={cz([
+                  'pt-card pt-elevation-1',
+                  styles.col,
+                  styles.preview
+                ])}
+              >
+                <Previewer />
+              </div>
+              <div className={cz([styles.col, styles.dank])}>
+                <NonIdealState visual="style" />
+              </div>
             </div>
-            <div
-              className={cz([
-                'pt-card pt-elevation-1',
-                styles.col,
-                styles.controller
-              ])}
-            >
-              <Controller float={float} toggleFloat={this.toggleFloat} />
-            </div>
-            <div className={cz([styles.col, styles.dank])}>
-              <NonIdealState visual="style" />
-            </div>
+            <WhitePortal name="backCover" />
+            <WhitePortal name="picker" />
           </div>
-        </div>
-      </Provider>
+        </Provider>
+      </PortalProvider>
     );
   }
 }

@@ -12,7 +12,7 @@ const Row = ({ name, value, onChange }) =>
     </td>
     <td>
       {typeof value === 'boolean'
-        ? <Switch checked={value} onChange={onChange} />
+        ? <Switch className="pt-large" checked={value} onChange={onChange} />
         : <InputGroup
           className={styles.edtValue}
           value={value}

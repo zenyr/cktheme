@@ -41,6 +41,7 @@ export default ({ colors }) =>
       recommend={11}
       time="10:07"
       count={5}
+      commentActive
       colors={colors}
     />
     <Item

@@ -2,18 +2,25 @@ import { h, Component } from 'preact';
 import styles from '../style.less';
 import { Button, Switch } from '@blueprintjs/core';
 import { bind } from 'decko';
+import { BlackPortal } from 'react-native-portal';
 import { cz } from '../../../lib/util';
 import { Actions, connect } from '../../../duck';
 import Json5 from 'json5';
 import map from 'lodash-es/map';
 import { Base64 } from 'js-base64';
-
-const regColor = /^#([a-f0-9]{3}|[a-f0-9]{6})$/i;
+import Menu from 'async!./Menu';
+const regColor = /^#?([a-f0-9]{3}|[a-f0-9]{6})$/i;
 
 const stateSelector = state => ({ Theme: state.Theme });
 @connect(stateSelector)
 export default class LoadController extends Component {
-  state = { success: false, input: '', error: '', base64: false };
+  state = {
+    success: false,
+    input: '',
+    error: '',
+    base64: false,
+    dropdown: false
+  };
 
   @bind
   handleReset() {
@@ -23,15 +30,33 @@ export default class LoadController extends Component {
       this.setState({ input: '', error: '', success: false });
     }
   }
+
   @bind
   handleStage(ev) {
     const input = ev.target.value;
     this.setState({ input, error: '', success: false });
   }
+
   @bind
   handleAtobToggle(ev) {
     const base64 = ev.target.checked;
     this.setState({ base64 });
+  }
+
+  @bind
+  handleDropdownToggle(ev) {
+    console.log(ev.srcElement);
+    const { dropdown } = this.state;
+    if (dropdown) {
+      this.setState({ dropdown: false });
+    } else {
+      this.setState({
+        dropdown: {
+          left: ev.pageX - (ev.layerX || 0),
+          bottom: ev.pageY - (ev.layerY || 0)
+        }
+      });
+    }
   }
 
   @bind
@@ -57,7 +82,8 @@ export default class LoadController extends Component {
                   `잘못된 색상 필드: ${innerFieldName} => ${innerValue}`
                 );
               if (Theme.data[innerFieldName] !== innerValue) {
-                dispatch(expectedFn(innerValue));
+                const matchResult = innerValue.match(regColor);
+                dispatch(expectedFn(`#${matchResult[1].toLowerCase()}`));
               }
             });
           } else {
@@ -97,12 +123,16 @@ export default class LoadController extends Component {
       });
     }
   }
+  @bind
+  handleLoadPreset(input) {
+    this.setState({ input, base64: true, dropdown: false }, this.handleApply);
+  }
 
   componentWillMount() {
     this.importQuerystring();
   }
 
-  render({ data }, { input, error, success, base64 }) {
+  render({ data }, { input, error, success, base64, dropdown }) {
     const atob = Base64.decode;
 
     return (
@@ -124,6 +154,14 @@ export default class LoadController extends Component {
             <h5>실패</h5>
             {error}
           </div>}
+        {!!dropdown &&
+          <BlackPortal name="backCover">
+            <div
+              className={styles.backCover}
+              onClick={this.handleDropdownToggle}
+            />
+          </BlackPortal>}
+
         <div className={styles.toolbar}>
           {!!atob &&
             <Switch
@@ -132,11 +170,18 @@ export default class LoadController extends Component {
               className="pt-large"
               onChange={this.handleAtobToggle}
             />}
+          {!!dropdown && <Menu onChange={this.handleLoadPreset} />}
           <div className="pt-button-group">
+            <Button
+              iconName="inbox"
+              active={!!dropdown}
+              rightIconName="caret-up"
+              onClick={this.handleDropdownToggle}
+            />
             <Button
               disabled={!input}
               className="pt-intent-danger"
-              iconName="trash"
+              iconName="eraser"
               onClick={this.handleReset}
             />
             <Button

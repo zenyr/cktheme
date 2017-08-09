@@ -45,24 +45,15 @@ class Row extends Component {
           {name}
           {open &&
             <div className={styles.backCover} onClick={this.handleOff} />}
-          {/* <InputGroup
-            rightElement={
-
-            }
-            onFocus={this.handleOn}
-            onBlur={this.handleOff}
-            value={result}
-            className={styles.colorInput}
-          /> */}
-          {open &&
-            <div className={styles.absolute}>
+          <div className={cz([styles.picker, open && styles.open])}>
+            {open &&
               <Picker
                 color={result}
                 onChange={this.handleChange}
                 onChangeComplete={this.handleChangeComplete}
                 disableAlpha
-              />
-            </div>}
+              />}
+          </div>
         </td>
         <td className={styles.tiny}>
           <a onClick={this.handleOn} className={styles.btnColor}>

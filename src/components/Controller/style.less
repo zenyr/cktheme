@@ -1,11 +1,5 @@
 .root {
-  padding: 0 10px 10px;
-  @media (max-width: 420px) {
-    padding: 0 5px 10px;
-    :global(> .pt-tab-list) {
-      padding: 0 5px;
-    }
-  }
+  padding: 10px;
 }
 
 // 하위 컨트롤러
@@ -91,8 +85,19 @@ textarea.code {
   bottom: 0;
   right: 0;
 }
-.absolute {
+.picker {
   // 피커 위치조정용 레이어
+  position: relative;
+  margin: 10px;
+  z-index: 5;
+}
+.dropup,
+.dropdown {
+  // 드롭다운/업 위치조정용 레이어
   position: absolute;
   z-index: 5;
+}
+
+.dropup {
+  bottom: 42px;
 }
