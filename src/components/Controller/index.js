@@ -38,7 +38,12 @@ export default class Controller extends Component {
         />
         <Tabs2.Expander />
         <Switch checked={float} onChange={toggleFloat}>
-          <span className="pt-icon pt-icon-minimize" />
+          <span
+            className={cz([
+              'pt-icon',
+              float ? 'pt-icon-applications' : 'pt-icon-list-detail-view'
+            ])}
+          />
         </Switch>
       </Tabs2>
     );

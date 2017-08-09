@@ -82,11 +82,15 @@ export default class InfoController extends Component {
           </tbody>
         </table>
         <div className={styles.toolbar}>
-          <Button text="취소" onClick={this.handleCancel} />
           <Button
             disabled={!dirty}
+            iconName="undo"
+            onClick={this.handleCancel}
+          />
+          <Button
+            disabled={!dirty}
+            iconName="floppy-disk"
             className="pt-intent-primary"
-            text="적용"
             onClick={this.handleApply}
           />
         </div>

@@ -18,7 +18,7 @@ export default class LoadController extends Component {
     success: false,
     input: '',
     error: '',
-    base64: false,
+    base64: true,
     dropdown: false
   };
 
@@ -166,18 +166,19 @@ export default class LoadController extends Component {
           {!!atob &&
             <Switch
               checked={base64}
-              label="공유코드"
+              label={<span className="pt-icon pt-icon-barcode" />}
               className="pt-large"
               onChange={this.handleAtobToggle}
             />}
           {!!dropdown && <Menu onChange={this.handleLoadPreset} />}
           <div className="pt-button-group">
             <Button
-              iconName="inbox"
               active={!!dropdown}
-              rightIconName="caret-up"
+              iconName="more"
               onClick={this.handleDropdownToggle}
             />
+          </div>
+          <div className="pt-button-group">
             <Button
               disabled={!input}
               className="pt-intent-danger"
@@ -185,9 +186,9 @@ export default class LoadController extends Component {
               onClick={this.handleReset}
             />
             <Button
-              iconName={success ? 'tick' : void 0}
+              iconName="import"
+              rightIconName={success ? 'tick' : void 0}
               className="pt-intent-primary"
-              text="불러오기"
               onClick={this.handleApply}
             />
           </div>

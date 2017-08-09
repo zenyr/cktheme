@@ -73,11 +73,13 @@ const actionBinder = autoBind({ ...Actions.ThemeData });
 @connect(stateSelector, actionBinder)
 export default class EditController extends Component {
   state = { hsl: false };
+
   @bind
   handleHSLToggle(ev) {
     const hsl = ev.target.checked;
     this.setState({ hsl });
   }
+
   @bind
   renderRow(value, name) {
     return (
@@ -90,13 +92,19 @@ export default class EditController extends Component {
       />
     );
   }
+
   render({ data }, { hsl }) {
     return (
       <div className={styles.childRoot}>
         <div className={styles.toolbar}>
           <Switch
             checked={hsl}
-            label="Alternative Picker"
+            label={
+              <span>
+                <span className="pt-icon pt-icon-tint" />
+                <span className="pt-icon pt-icon-key-option" />
+              </span>
+            }
             onChange={this.handleHSLToggle}
           />
         </div>

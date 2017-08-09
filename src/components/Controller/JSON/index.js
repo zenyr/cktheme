@@ -66,18 +66,18 @@ export default class JSONController extends Component {
         <div className={styles.toolbar}>
           <Switch
             checked={loose}
-            label="JSON5"
+            label={<span className="pt-icon pt-icon-code-block" />}
             onChange={this.handleLooseToggle}
           />
           <Switch
             checked={pretty}
-            label="줄바꿈"
+            label={<span className="pt-icon pt-icon-key-enter" />}
             onChange={this.handlePrettyToggle}
           />
           <Switch
             checked={base64}
             disabled={!btoa}
-            label="공유 코드"
+            label={<span className="pt-icon pt-icon-barcode" />}
             onChange={this.handleBtoaToggle}
           />
         </div>
@@ -104,7 +104,7 @@ export default class JSONController extends Component {
                 text="편집링크"
               />}
             <Button
-              iconName="pt-icon-text-highlight"
+              iconName="select"
               className="pt-intent-primary"
               onClick={this.handleSelectAll}
               text="모두 선택"

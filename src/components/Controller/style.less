@@ -1,5 +1,12 @@
 .root {
   padding: 10px;
+  :global(.pt-tab-list) {
+    padding-bottom: 5px;
+    border-bottom: 1px solid fade(#000, 20%);
+  }
+  :global(.pt-tab-panel) {
+    margin-top: 10px;
+  }
 }
 
 // 하위 컨트롤러
@@ -10,6 +17,9 @@
 
 .toolbar {
   text-align: right;
+  &:last-child {
+    margin-bottom: -10px;
+  }
   > * {
     display: inline-block;
     margin-left: 10px;
@@ -20,6 +30,7 @@
 .table {
   width: 100%;
   table-layout: fixed;
+  margin-top:-10px;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
@@ -96,8 +107,9 @@ textarea.code {
   // 드롭다운/업 위치조정용 레이어
   position: absolute;
   z-index: 5;
+  min-width: 80px;
 }
 
 .dropup {
-  bottom: 42px;
+  bottom: 32px;
 }

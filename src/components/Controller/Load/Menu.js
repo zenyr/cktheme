@@ -15,7 +15,7 @@ export default class LoadControllerMenu extends Component {
     return (
       <Menu className={cz(['pt-card pt-elevation-2', styles.dropup])}>
         {Object.keys(CODES).map(name =>
-          <MenuItem onClick={this.handleClick(name)} text={name} />
+          <MenuItem iconName="document-open" onClick={this.handleClick(name)} text={name} />
         )}
       </Menu>
     );
