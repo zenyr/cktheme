@@ -48,10 +48,10 @@ export default ({ colors, toggleMode, hideBar }) =>
       style={`background:${colors.statusBackground};color:${colors.statusText}`}
     >
       <div className={styles.left}>
-        <span className="pt-icon pt-icon-more" />
+        <span className="pt-icon-standard pt-icon-more" />
       </div>
       <div className={styles.right}>
-        <span className="pt-icon pt-icon-social-media" />
+        <span className="pt-icon-standard pt-icon-social-media" />
       </div>
       <Clock />
     </div>

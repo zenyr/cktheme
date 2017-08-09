@@ -166,7 +166,7 @@ export default class LoadController extends Component {
           {!!atob &&
             <Switch
               checked={base64}
-              label={<span className="pt-icon pt-icon-barcode" />}
+              label={<span className="pt-icon-large pt-icon-barcode" />}
               className="pt-large"
               onChange={this.handleAtobToggle}
             />}

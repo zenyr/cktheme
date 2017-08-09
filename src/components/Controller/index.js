@@ -40,7 +40,7 @@ export default class Controller extends Component {
         <Switch checked={float} onChange={toggleFloat}>
           <span
             className={cz([
-              'pt-icon',
+              'pt-icon-standard',
               float ? 'pt-icon-applications' : 'pt-icon-list-detail-view'
             ])}
           />

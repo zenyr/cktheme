@@ -14,10 +14,10 @@ export default ({ colors }) =>
     >
       <div className={styles.header}>
         <div className={styles.left}>
-          <span className="pt-icon pt-icon-selection" />
+          <span className="pt-icon-standard pt-icon-selection" />
         </div>
         <div className={styles.right}>
-          <span className="pt-icon pt-icon-menu" />
+          <span className="pt-icon-standard pt-icon-menu" />
         </div>
         <div className={styles.text}>기본 게시판</div>
         <div className={styles.dots}>
@@ -55,11 +55,11 @@ export default ({ colors }) =>
         <a className={styles.item}>버그신고</a>
       </div>
       <div className={styles.footer}>
-        <span className="pt-icon pt-icon-edit" />
-        <span className="pt-icon pt-icon-bookmark" />
-        <span className="pt-icon pt-icon-envelope" />
-        <span className="pt-icon pt-icon-user" />
-        <span className="pt-icon pt-icon-more" />
+        <span className="pt-icon-standard pt-icon-edit" />
+        <span className="pt-icon-standard pt-icon-bookmark" />
+        <span className="pt-icon-standard pt-icon-envelope" />
+        <span className="pt-icon-standard pt-icon-user" />
+        <span className="pt-icon-standard pt-icon-more" />
       </div>
     </div>
   </div>);

@@ -101,8 +101,8 @@ export default class EditController extends Component {
             checked={hsl}
             label={
               <span>
-                <span className="pt-icon pt-icon-tint" />
-                <span className="pt-icon pt-icon-key-option" />
+                <span className="pt-icon-standard pt-icon-tint" />
+                <span className="pt-icon-standard pt-icon-key-option" />
               </span>
             }
             onChange={this.handleHSLToggle}

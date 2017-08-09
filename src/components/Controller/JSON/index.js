@@ -66,18 +66,18 @@ export default class JSONController extends Component {
         <div className={styles.toolbar}>
           <Switch
             checked={loose}
-            label={<span className="pt-icon pt-icon-code-block" />}
+            label={<span className="pt-icon-standard pt-icon-code-block" />}
             onChange={this.handleLooseToggle}
           />
           <Switch
             checked={pretty}
-            label={<span className="pt-icon pt-icon-key-enter" />}
+            label={<span className="pt-icon-standard pt-icon-key-enter" />}
             onChange={this.handlePrettyToggle}
           />
           <Switch
             checked={base64}
             disabled={!btoa}
-            label={<span className="pt-icon pt-icon-barcode" />}
+            label={<span className="pt-icon-standard pt-icon-barcode" />}
             onChange={this.handleBtoaToggle}
           />
         </div>
