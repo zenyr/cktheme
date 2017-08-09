@@ -3,11 +3,12 @@ import styles from '../style.less';
 import { map } from 'lodash-es';
 import { bind, debounce } from 'decko';
 import { SketchPicker, ChromePicker } from 'react-color';
-import { Switch } from '@blueprintjs/core';
+import { Switch, Button } from '@blueprintjs/core';
 
 import { Actions, autoBind, connect } from '../../../duck';
 import { cz } from '../../../lib/util';
 
+const sleep = t => new Promise(r => setTimeout(r, t));
 class Row extends Component {
   state = { open: false, overrideColor: false };
 
@@ -30,11 +31,34 @@ class Row extends Component {
       this.props.onChange(v.hex.toLowerCase());
     }
   }
+  @bind
+  async handleFlash(ev) {
+    const { value, onChange } = this.props;
+    ev.stopPropagation();
+    if (this._flashing) return;
+    this._flashing = true;
+    for (let i = 0; i < 5; i++) {
+      if (this._dead) return;
+      onChange('#ff00ff');
+      await sleep(33);
+      onChange('#ff0000');
+      await sleep(33);
+      onChange('#0000ff');
+      await sleep(33);
+      if (this._dead) return;
+      onChange(value);
+      await sleep(100);
+    }
+    this._flashing = false;
+  }
   componentWillReceiveProps(newProps) {
     const oldProps = this.props;
     if (oldProps.value !== newProps.value) {
       this.setState({ overrideColor: false });
     }
+  }
+  componentWillUnmount() {
+    this._dead = true;
   }
   render({ name, value, onChange, hsl }, { open, overrideColor }) {
     const result = overrideColor ? overrideColor : value;
@@ -61,6 +85,11 @@ class Row extends Component {
             <code>
               {value.toLowerCase()}
             </code>
+            <Button
+              className="pt-minimal"
+              iconName="flash"
+              onClick={this.handleFlash}
+            />
           </a>
         </td>
       </tr>
