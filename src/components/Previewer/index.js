@@ -8,16 +8,21 @@ import ViewAuto from './ViewAuto';
 const stateSelector = state => ({ colors: state.Theme.data });
 @connect(stateSelector, {})
 export default class Previewer extends Component {
-  state = { mode: 'menu' };
+  state = { mode: 'read' };
   @bind
   handleToggleMode() {
     const { mode: oldMode } = this.state;
-    const mode = oldMode === 'list' ? 'menu' : 'list';
+    const mode =
+      oldMode === 'menu' ? 'list' : oldMode === 'list' ? 'read' : 'menu';
     this.setState({ mode });
   }
   render({ colors }, { mode }) {
     return (
-      <ViewAuto mode={mode} colors={colors} toggleMode={this.handleToggleMode} />
+      <ViewAuto
+        mode={mode}
+        colors={colors}
+        toggleMode={this.handleToggleMode}
+      />
     );
   }
 }

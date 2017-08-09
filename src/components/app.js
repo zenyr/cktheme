@@ -14,7 +14,7 @@ import { cz } from '../lib/util';
 FocusStyleManager.onlyShowFocusOnTabs();
 
 export default class App extends Component {
-  state = { float: true };
+  state = { float: false };
   @bind
   toggleFloat() {
     this.setState({ float: !this.state.float });

@@ -34,16 +34,25 @@ export default class Item extends Component {
     commentActive,
     recommend,
     recommendActive,
+    read,
+    mine,
     time,
     count
   }) {
     return (
       <div
         className={styles.item}
-        style={`border-bottom-color:${colors.paperLine}`}
+        style={`background-color:${mine
+          ? colors.highlightedBackground
+          : 'transparent'};border-bottom-color:${colors.paperLine}`}
       >
         <div className={styles.topRow}>
-          <div className={styles.title} style={`color:${colors.paperText}`}>
+          <div
+            className={styles.title}
+            style={`color:${read
+              ? colors.paperAltText
+              : mine ? colors.highlightedText : colors.paperText}`}
+          >
             {title}
           </div>
           {!!comment &&
@@ -74,7 +83,12 @@ export default class Item extends Component {
           <div className={styles.time} style={`color:${colors.time}`}>
             {count}
           </div>
-          <div className={styles.name} style={`color:${colors.name}`}>
+          <div
+            className={styles.name}
+            style={`color:${mine
+              ? colors.nameAuthor
+              : read ? colors.paperAltText : colors.name}`}
+          >
             {name}
           </div>
         </div>

@@ -41,17 +41,19 @@ export default ({ colors }) =>
       recommend={11}
       time="10:07"
       count={5}
+      read
       commentActive
       colors={colors}
     />
     <Item
       title="모든 국민은 신속한 재판을 받을 권리를 가진다. 형사피고인은 상당한 이유가 없는 한 지체없이 공개재판을"
-      name="임꺽정"
+      name="내꺼야"
       comment={0}
       recommend={1}
       time="10:07"
       count={1234}
       colors={colors}
+      mine
     />
     <Item
       title="국회의원의 선거구와 비례대표제 기타 선거에 관한 사항은 법률로 정한다."
