@@ -15,11 +15,33 @@
   overflow: hidden;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  select:focus,
-  textarea:focus,
-  input:focus {
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select,
+  textarea,
+  input {
     font-size: 16px;
-    background: #eee;
   }
+}
+
+.float {
+  .preview {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    transform-origin: bottom right;
+    @media screen and (max-width: 1000px) {
+      transform: scale(0.75);
+    }
+    @media screen and (max-width: 420px) {
+      transform: scale(0.5);
+    }
+  }
+  .dank {
+    display: block;
+  }
+}
+.dank {
+  display: none;
+  height: 330px;
 }

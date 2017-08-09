@@ -26,8 +26,10 @@ class Clock extends Component {
           ' ',
           d.getHours() % 12,
           ':',
+          d.getMinutes() < 10 ? '0' : '',
           d.getMinutes(),
           ':',
+          d.getSeconds() < 10 ? '0' : '',
           d.getSeconds()
         ].join('')}
       </span>

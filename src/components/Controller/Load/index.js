@@ -1,11 +1,12 @@
 import { h, Component } from 'preact';
-import styles from './style.less';
+import styles from '../style.less';
 import { Button, Switch } from '@blueprintjs/core';
 import { bind } from 'decko';
 import { cz } from '../../../lib/util';
 import { Actions, connect } from '../../../duck';
 import Json5 from 'json5';
 import map from 'lodash-es/map';
+import { Base64 } from 'js-base64';
 
 const regColor = /^#([a-f0-9]{3}|[a-f0-9]{6})$/i;
 
@@ -14,6 +15,14 @@ const stateSelector = state => ({ Theme: state.Theme });
 export default class LoadController extends Component {
   state = { success: false, input: '', error: '', base64: false };
 
+  @bind
+  handleReset() {
+    if (typeof window !== 'undefined') {
+      window.location.search = '';
+    } else {
+      this.setState({ input: '', error: '', success: false });
+    }
+  }
   @bind
   handleStage(ev) {
     const input = ev.target.value;
@@ -31,10 +40,7 @@ export default class LoadController extends Component {
       const { input, base64 } = this.state;
       const { dispatch, Theme } = this.props;
       if (!input) throw new Error('입력값이 없습니다.');
-      let atob;
-      if (typeof window !== 'undefined') {
-        atob = window.atob;
-      }
+      const atob = Base64.decode;
       const parsed = Json5.parse(base64 && atob ? atob(input) : input);
       if (parsed) {
         map(parsed, (value, fieldName) => {
@@ -45,7 +51,7 @@ export default class LoadController extends Component {
               const expectedFn = Actions.ThemeData[innerFieldName];
               if (
                 typeof expectedFn !== 'function' ||
-                !innerValue.test(regColor)
+                !regColor.test(innerValue)
               )
                 throw new Error(
                   `잘못된 색상 필드: ${innerFieldName} => ${innerValue}`
@@ -70,19 +76,37 @@ export default class LoadController extends Component {
     }
   }
 
-  componentWillMount() {
+  @bind
+  importQuerystring() {
     if (typeof window !== 'undefined') {
-      const search = window.location.search;
-      // TODO: 쿼리로 바로 스킨 당겨오기
+      const search = ('' + window.location.search).split('?');
+      search.map(keyValue => {
+        const [key, value] = keyValue.split('=');
+        if (key === 'b') {
+          this.setState(
+            { input: value.replace(/-/g, '='), base64: true },
+            this.handleApply
+          );
+        }
+        if (key === 'j') {
+          this.setState(
+            { input: decodeURIComponent(value), base64: false },
+            this.handleApply
+          );
+        }
+      });
     }
   }
+
+  componentWillMount() {
+    this.importQuerystring();
+  }
+
   render({ data }, { input, error, success, base64 }) {
-    let atob;
-    if (typeof window !== 'undefined') {
-      atob = window.atob;
-    }
+    const atob = Base64.decode;
+
     return (
-      <div className={styles.root}>
+      <div className={styles.childRoot}>
         <textarea
           className={cz([
             'pt-input pt-fill',
@@ -91,7 +115,7 @@ export default class LoadController extends Component {
           ])}
           dir="auto"
           onChange={this.handleStage}
-          rows={25}
+          rows={20}
           placeholder="테마 JSON 또는 공유코드를 붙여넣으세요"
           value={input}
         />
@@ -108,12 +132,20 @@ export default class LoadController extends Component {
               className="pt-large"
               onChange={this.handleAtobToggle}
             />}
-          <Button
-            iconName={success ? 'tick' : void 0}
-            className="pt-intent-primary"
-            text="불러오기"
-            onClick={this.handleApply}
-          />
+          <div className="pt-button-group">
+            <Button
+              disabled={!input}
+              className="pt-intent-danger"
+              iconName="trash"
+              onClick={this.handleReset}
+            />
+            <Button
+              iconName={success ? 'tick' : void 0}
+              className="pt-intent-primary"
+              text="불러오기"
+              onClick={this.handleApply}
+            />
+          </div>
         </div>
       </div>
     );

@@ -7,6 +7,7 @@
     "now-start": "preact serve",
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
     "build": "preact build --no-prerender",
+    "manual-build": "yarn build&&cd build&&now --public&&cd ..",
     "serve": "preact build --no-prerender && preact serve",
     "dev": "preact watch",
     "test": "eslint src && preact test"
@@ -44,6 +45,7 @@
   "dependencies": {
     "@blueprintjs/core": "^1.24.0",
     "decko": "^1.2.0",
+    "js-base64": "^2.1.9",
     "json5": "^0.5.1",
     "lodash": "^4.17.4",
     "preact": "^8.2.1",

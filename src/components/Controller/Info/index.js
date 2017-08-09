@@ -1,5 +1,5 @@
 import { h, Component } from 'preact';
-import styles from './style.less';
+import styles from '../style.less';
 import { Switch, InputGroup, Button } from '@blueprintjs/core';
 import { bind } from 'decko';
 import { cz } from '../../../lib/util';
@@ -13,7 +13,11 @@ const Row = ({ name, value, onChange }) =>
     <td>
       {typeof value === 'boolean'
         ? <Switch checked={value} onChange={onChange} />
-        : <InputGroup value={value} onChange={onChange} />}
+        : <InputGroup
+          className={styles.edtValue}
+          value={value}
+          onChange={onChange}
+        />}
     </td>
   </tr>);
 
@@ -63,7 +67,7 @@ export default class InfoController extends Component {
   }
   render({ data }, { id, name, dark, dirty }) {
     return (
-      <div className={styles.root}>
+      <div className={styles.childRoot}>
         <table className={cz(['pt-table', styles.table])}>
           <thead>
             <tr>

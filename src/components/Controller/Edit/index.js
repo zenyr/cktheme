@@ -1,5 +1,5 @@
 import { h, Component } from 'preact';
-import styles from './style.less';
+import styles from '../style.less';
 import { map } from 'lodash-es';
 import { bind, debounce } from 'decko';
 import { SketchPicker, ChromePicker } from 'react-color';
@@ -43,14 +43,6 @@ class Row extends Component {
       <tr>
         <td className={styles.tiny}>
           {name}
-        </td>
-        <td className={styles.tiny}>
-          <a onClick={this.handleOn} className={styles.btnColor}>
-            <div className={styles.swatch} style={{ background: result }} />
-            <code>
-              {value.toLowerCase()}
-            </code>
-          </a>
           {open &&
             <div className={styles.backCover} onClick={this.handleOff} />}
           {/* <InputGroup
@@ -71,6 +63,14 @@ class Row extends Component {
                 disableAlpha
               />
             </div>}
+        </td>
+        <td className={styles.tiny}>
+          <a onClick={this.handleOn} className={styles.btnColor}>
+            <div className={styles.swatch} style={{ background: result }} />
+            <code>
+              {value.toLowerCase()}
+            </code>
+          </a>
         </td>
       </tr>
     );
@@ -101,13 +101,14 @@ export default class EditController extends Component {
   }
   render({ data }, { hsl }) {
     return (
-      <div className={styles.root}>
-        <Switch
-          checked={hsl}
-          label="Alternative Picker"
-          onChange={this.handleHSLToggle}
-        />
-
+      <div className={styles.childRoot}>
+        <div className={styles.toolbar}>
+          <Switch
+            checked={hsl}
+            label="Alternative Picker"
+            onChange={this.handleHSLToggle}
+          />
+        </div>
         <table className={cz(['pt-table pt-condensed', styles.table])}>
           <thead>
             <tr>
