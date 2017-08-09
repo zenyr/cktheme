@@ -1,6 +1,5 @@
 import { h, Component } from 'preact';
 import styles from './style.less';
-import { cz } from '../../lib/util';
 
 export default class Item extends Component {
   render({ colors, name, date, text, like, mine, author, reply }) {

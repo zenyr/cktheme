@@ -13,6 +13,16 @@
   bottom: 0;
   right: 0;
   transition: transform .3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollOverlay() {
+  overflow: auto;
+  overflow-y: overlay;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 .overlay {
@@ -71,8 +81,8 @@
 .boxList {
   // 글목록 메인박스
   height: inherit;
-  overflow: hidden;
-
+  .scrollOverlay();
+  flex: 1;
   .item {
     // 글목록 개별항목
     padding: 10px;
@@ -123,20 +133,17 @@
 }
 
 .boxPrimary {
-  .abs;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  .rel;
   height: 44px;
   text-align: center;
   z-index: 1;
   :global(.pt-icon-large) {
     padding: 0 10px;
   }
-  transition: opacity .2s;
+  transition: height .2s;
   &.hidden {
     // 숨김처리
-    opacity: 0;
+    height: 0;
   }
   .left {
     line-height: 44px;
@@ -240,6 +247,8 @@
 }
 
 .boxRead {
+  flex: 1;
+  .scrollOverlay();
   .title {
     font-weight: bold;
     font-size: 13px;
@@ -271,7 +280,7 @@
   .text {
     padding: 15px;
     min-height: 130px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 20px;
     white-space: pre-wrap;
   }

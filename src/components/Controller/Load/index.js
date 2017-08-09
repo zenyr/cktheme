@@ -186,6 +186,7 @@ export default class LoadController extends Component {
               onClick={this.handleReset}
             />
             <Button
+              disabled={success || !input}
               iconName="import"
               rightIconName={success ? 'tick' : void 0}
               className="pt-intent-primary"
