@@ -1,32 +1,51 @@
 import { h, Component } from 'preact';
-import styles from '../style.less';
 import Json5 from 'json5';
+import fetchJsonp from 'fetch-jsonp';
 import { Switch, AnchorButton, Button } from '@blueprintjs/core';
 import { bind } from 'decko';
 import { Base64 } from 'js-base64';
 import { cz } from '../../../lib/util';
-
 import { connect } from '../../../duck';
+import PresentURL from './PresentURL';
+import styles from '../style.less';
+import { BlackPortal } from 'react-native-portal';
 
 const stateSelector = state => ({ data: state.Theme });
 @connect(stateSelector, {})
 export default class JSONController extends Component {
-  state = { loose: false, pretty: true, base64: false };
+  state = {
+    loose: false,
+    pretty: true,
+    base64: false,
+    presentURL: false //{ success: true, url: 'https://goo.gl/6NaoBq' }
+  };
   @bind
   handleLooseToggle(ev) {
     const loose = ev.target.checked;
     this.setState({ loose, base64: false });
   }
+
   @bind
   handlePrettyToggle(ev) {
     const pretty = ev.target.checked;
     this.setState({ pretty });
   }
+
   @bind
   handleBtoaToggle(ev) {
     const base64 = ev.target.checked;
-    this.setState({ base64, loose: false });
+    this.setState({
+      base64,
+      loose: false,
+      pretty: base64 ? false : this.state.pretty
+    });
   }
+
+  @bind
+  handleURLOff() {
+    this.setState({ presentURL: false });
+  }
+
   @bind
   handleSelectAll() {
     const ref = this._textarea;
@@ -41,6 +60,37 @@ export default class JSONController extends Component {
       } catch (e) {}
     }
   }
+
+  @bind
+  handleShortLink(url) {
+    // JSONP API호출
+    return async () => {
+      try {
+        this.setState({ presentURL: { loading: true } });
+
+        const response = await fetchJsonp(
+          `http://urltinyfy.appspot.com/googl?url=${encodeURIComponent(url)}`,
+          { jsonpCallback: 'jsonp' }
+        );
+        const json = await response.json();
+        if (this._dead) return;
+        if (json && json.short_url) {
+          this.setState({ presentURL: { success: true, url: json.short_url } });
+        } else {
+          throw new Error('단축URL 서비스에 접속하지 못하였습니다.');
+        }
+      } catch (e) {
+        if (this._dead) return;
+        this.setState({
+          presentURL: {
+            success: false,
+            error: e.message
+          }
+        });
+      }
+    };
+  }
+
   @bind
   getEditLink(val) {
     if (typeof window !== 'undefined') {
@@ -53,13 +103,18 @@ export default class JSONController extends Component {
     }
     return '';
   }
-  render({ data }, { loose, pretty, base64 }) {
+
+  componentWillUnmount() {
+    this._dead = true;
+  }
+
+  render({ data }, { loose, pretty, base64, presentURL }) {
     let result = loose
       ? Json5.stringify(data, null, pretty ? 2 : 0)
       : JSON.stringify(data, null, pretty ? 2 : 0);
     const btoa = Base64.encode;
-
     if (base64 && btoa) result = btoa(result);
+    const editLinkURL = this.getEditLink(result);
 
     return (
       <div className={styles.childRoot}>
@@ -94,15 +149,19 @@ export default class JSONController extends Component {
             Res:{result.length.toLocaleString()}b
           </span>
           <span className="pt-ui-text">
-            Lnk:{this.getEditLink(result).length.toLocaleString()}b
+            Lnk:{editLinkURL.length.toLocaleString()}b
           </span>
-          <div className="pt-button-group">
-            {result &&
-              <AnchorButton
-                href={this.getEditLink(result)}
-                iconName="share"
-                text="편집링크"
+          <div className="pt-button-group pt-large">
+            {editLinkURL &&
+              !pretty &&
+              base64 &&
+              <Button
+                iconName="link"
+                className="pt-intent-success"
+                onClick={this.handleShortLink(editLinkURL)}
               />}
+            {editLinkURL &&
+              <AnchorButton href={editLinkURL} iconName="share" />}
             <Button
               iconName="select"
               className="pt-intent-primary"
@@ -111,6 +170,12 @@ export default class JSONController extends Component {
             />
           </div>
         </div>
+        {presentURL &&
+          <BlackPortal name="backCover">
+            <div className={styles.backCover} onClick={this.handleURLOff} />
+          </BlackPortal>}
+        {presentURL &&
+          <PresentURL {...presentURL} onClose={this.handleURLOff} />}
       </div>
     );
   }
