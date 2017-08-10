@@ -1,20 +1,34 @@
 import { Component } from 'preact';
 import styles from './style.less';
+import { cz } from '../../lib/util';
 
 export default class Item extends Component {
-  render({ colors, name, date, text, like, mine, owner, author, reply }) {
+  render({
+    colors,
+    name,
+    date,
+    text,
+    like,
+    mine,
+    owner,
+    marked,
+    author,
+    reply
+  }) {
     return (
       <div
-        className={styles.item}
-        style={`background-color:${mine
-          ? colors.highlightedBackground
-          : reply
-            ? colors.paperAlt
-            : 'transparent'};border-bottom-color:${colors.paperLine};${reply
+        className={cz([styles.item, marked && styles.marked])}
+        style={`background-color:${marked
+          ? colors.markedBackground
+          : mine
+            ? colors.highlightedBackground
+            : reply
+              ? colors.paperAlt
+              : 'transparent'};border-bottom-color:${colors.paperLine};${reply
           ? `padding-left:40px;`
-          : ''}`}
+          : ''};`}
       >
-        <div className={styles.topRow}>
+        <div className={styles.topRow} style={`font-weight:${owner ? 'bold' : 'normal'}`}>
           <div
             className={styles.name}
             style={`color:${owner ? colors.nameAuthor : colors.name};`}

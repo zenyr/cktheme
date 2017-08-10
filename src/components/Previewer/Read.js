@@ -29,7 +29,7 @@ export default ({ colors }) =>
         살았으며, 유소년에게서 공자는 인생에 이상의 실현에 위하여서.
       </p>
       <div className={styles.source}>
-        출처 :
+        출처 :{' '}
         <span className={styles.link} style={`color:${colors.link}`}>
           http://clien.net
         </span>
@@ -62,6 +62,7 @@ export default ({ colors }) =>
       name="목과머리의분리"
       text="무엇을 이상 자신과 미묘한 그들의 용기가 얼마나 설레는 그들의 봄바람이다. 사람은 든 그들의 구하기 역사를 때문이다. 인간은 따뜻한 싹이 그들의 피부가 부패뿐이다. 평화스러운 붙잡아 스며들어 그러므로 칼이다."
       date="9/11 12:34:56"
+      marked
     />
     <Item
       colors={colors}
