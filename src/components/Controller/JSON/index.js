@@ -69,7 +69,7 @@ export default class JSONController extends Component {
         this.setState({ presentURL: { loading: true } });
 
         const response = await fetchJsonp(
-          `http://urltinyfy.appspot.com/googl?url=${encodeURIComponent(url)}`,
+          `//urltinyfy.appspot.com/googl?url=${encodeURIComponent(url)}`,
           { jsonpCallback: 'jsonp' }
         );
         const json = await response.json();

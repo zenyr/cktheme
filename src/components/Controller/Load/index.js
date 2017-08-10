@@ -45,7 +45,6 @@ export default class LoadController extends Component {
 
   @bind
   handleDropdownToggle(ev) {
-    console.log(ev.srcElement);
     const { dropdown } = this.state;
     if (dropdown) {
       this.setState({ dropdown: false });
