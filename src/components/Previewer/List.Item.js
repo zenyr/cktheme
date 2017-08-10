@@ -35,6 +35,7 @@ export default class Item extends Component {
     recommend,
     recommendActive,
     category,
+    scrap,
     read,
     mine,
     time,
@@ -70,6 +71,12 @@ export default class Item extends Component {
               commentActive={commentActive}
             />}
         </div>
+        {!!scrap &&
+          <div className={styles.midRow}>
+            <span className={styles.scrap} style={`color:${colors.scrap}`}>
+              {scrap}
+            </span>
+          </div>}
         <div className={styles.bottomRow}>
           {!!recommend &&
             <div

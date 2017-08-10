@@ -2,7 +2,7 @@ import { Component } from 'preact';
 import styles from './style.less';
 
 export default class Item extends Component {
-  render({ colors, name, date, text, like, mine, author, reply }) {
+  render({ colors, name, date, text, like, mine, owner, author, reply }) {
     return (
       <div
         className={styles.item}
@@ -17,11 +17,14 @@ export default class Item extends Component {
         <div className={styles.topRow}>
           <div
             className={styles.name}
-            style={`color:${mine ? colors.nameAuthor : colors.name};`}
+            style={`color:${owner ? colors.nameAuthor : colors.name};`}
           >
             {name}
           </div>
-          <div className={styles.date} style={`color:${colors.time}`}>
+          <div
+            className={styles.date}
+            style={`color:${owner ? colors.nameAuthor : colors.time}`}
+          >
             {date}
           </div>
           {!!like &&

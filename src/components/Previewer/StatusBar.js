@@ -22,7 +22,7 @@ class Clock extends Component {
           ') ',
           d.getHours() >= 12 ? '오후' : '오전',
           ' ',
-          d.getHours() % 12,
+          d.getHours() % 12 || 12,
           ':',
           d.getMinutes() < 10 ? '0' : '',
           d.getMinutes(),

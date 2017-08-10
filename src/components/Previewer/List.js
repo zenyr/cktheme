@@ -65,18 +65,19 @@ export default ({ colors }) =>
       colors={colors}
     />
     <Item
-      title="법관이 중대한 심신상의 장해로 직무를 수행할 수 없을 때에는 법률이 정하는 바에 의하여 퇴직하게 할 수 ..."
-      name="계백"
-      comment={11}
+      title="국가는 농지에 관하여 경자유전의 원칙이 달성될 수 있도록 노력하여야 하며, 농지의 소작제도는 금지된다."
+      name="심순애"
+      comment={0}
       recommend={0}
       time="10:07"
       count={1234}
       colors={colors}
+      scrap="어쩌면 임대인들은 현대판 소작농이 아닐까"
     />
     <Item
-      title="국가는 농지에 관하여 경자유전의 원칙이 달성될 수 있도록 노력하여야 하며, 농지의 소작제도는 금지된다."
-      name="심순애"
-      comment={0}
+      title="법관이 중대한 심신상의 장해로 직무를 수행할 수 없을 때에는 법률이 정하는 바에 의하여 퇴직하게 할 수 ..."
+      name="계백"
+      comment={11}
       recommend={0}
       time="10:07"
       count={1234}

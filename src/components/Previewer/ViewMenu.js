@@ -2,10 +2,7 @@ import styles from './style.less';
 import { cz } from '../../lib/util';
 
 export default ({ colors }) =>
-  (<div
-    style={`background:#000`}
-    className={cz([styles.viewWrap, styles.boxMenuWrap])}
-  >
+  (<div style={`background:#000`} className={styles.viewWrap}>
     {/* <div className={styles.overlay} /> */}
     <div
       className={styles.boxMenu}
