@@ -1,11 +1,12 @@
 import { h, Component } from 'preact';
 import styles from '../style.less';
-import { map } from 'lodash-es';
+import map from 'lodash-es/map';
 import { bind, debounce } from 'decko';
-import { SketchPicker, ChromePicker } from 'react-color';
+import { SketchPicker } from 'react-color';
 import { Switch, Button } from '@blueprintjs/core';
 
 import { Actions, autoBind, connect } from '../../../duck';
+import CustomPicker from '../../Picker';
 import { cz } from '../../../lib/util';
 
 const sleep = t => new Promise(r => setTimeout(r, t));
@@ -30,6 +31,7 @@ class Row extends Component {
     if (this.props.value !== v.hex) {
       this.props.onChange(v.hex.toLowerCase());
     }
+    if (v.done) this.handleOff();
   }
   @bind
   async handleFlash(ev) {
@@ -62,22 +64,33 @@ class Row extends Component {
   }
   render({ name, value, onChange, hsl }, { open, overrideColor }) {
     const result = overrideColor ? overrideColor : value;
-    const Picker = hsl ? ChromePicker : SketchPicker;
-    return (
-      <tr>
-        <td className={styles.tiny}>
-          {name}
-          {open &&
-            <div className={styles.backCover} onClick={this.handleOff} />}
-          <div className={cz([styles.picker, open && styles.open])}>
-            {open &&
+    const Picker = hsl ? SketchPicker : CustomPicker;
+    if (open) {
+      return (
+        <tr>
+          <td colSpan={2}>
+            <strong>
+              {name}
+            </strong>
+            <div className={styles.swatch} style={{ background: result }} />
+            <br />
+            <div className={styles.backCover} onClick={this.handleOff} />
+            <div className={styles.picker}>
               <Picker
                 color={result}
                 onChange={this.handleChange}
                 onChangeComplete={this.handleChangeComplete}
                 disableAlpha
-              />}
-          </div>
+              />
+            </div>
+          </td>
+        </tr>
+      );
+    }
+    return (
+      <tr>
+        <td className={styles.tiny}>
+          {name}
         </td>
         <td className={styles.tiny}>
           <a onClick={this.handleOn} className={styles.btnColor}>

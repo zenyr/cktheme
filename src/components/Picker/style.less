@@ -1,0 +1,129 @@
+.root {
+  width: 400px;
+  max-width: 100%;
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.boxWrapper {
+  @size: 40px;
+  display: flex;
+  flex-direction: column;
+  line-height: @size;
+  color: fade(#000, 50%);
+  .boxCommon {
+    position: relative;
+    border-radius: 10px;
+    margin: 5px;
+    box-shadow: 0 1px 3px #888;
+
+    font-size: 10px;
+    font-weight: bold;
+  }
+  .boxRow {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+  }
+  .boxCol {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+  .boxHue,
+  .boxMain,
+  .boxSatu {
+    flex: 1 0 @size;
+    .boxCommon();
+  }
+  .boxR,
+  .boxG,
+  .boxB {
+    .boxCommon();
+  }
+  .boxHue,
+  .boxSatu,
+  .boxG,
+  .boxB {
+    height: @size;
+  }
+  .boxLight {
+    width: @size;
+    position: relative;
+    .boxCommon();
+  }
+  .boxMain {
+    flex: 3;
+    font-size: 14px;
+    font-family: monospace;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    color: #000;
+    text-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #fff, 0 0 3px #fff;
+  }
+  .boxBtn {
+    // 확인/취소 버튼
+    .boxCommon();
+    line-height: 60px;
+    text-align: center;
+    flex: 1;
+    box-shadow: inset 0 0 3px #888;
+    text-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #fff;
+  }
+
+  .boxR {
+    width: @size;
+  }
+
+  .boxHue {
+    background-image: linear-gradient(
+      to right,
+      #f00 0%,
+      #ff0 17%,
+      #0f0 33%,
+      #0ff 50%,
+      #00f 67%,
+      #f0f 83%,
+      #f00 100%
+    );
+  }
+  // 위치표시
+  .position {
+    pointer-events: none;
+    position: absolute;
+    z-index: 3;
+    background: fade(#fff, 80%);
+    width: @size;
+    height: 3px;
+    top: 0;
+    border-radius: 3px;
+    box-shadow: 0 0 3px #000, 0 0 3px #000;
+    transform: rotate(270deg) translate(-@size + 2px, -1px);
+    transform-origin: center left;
+    text-align: left;
+    font-size: 12px;
+    line-height: 12px;
+    color: #000;
+    text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 5px #fff;
+    &::after {
+      content: attr(data-value);
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: -4px;
+      font-weight: bold;
+      transform: rotate(90deg);
+    }
+    &.vertical {
+      transform: rotate(0deg) translate(-0px, -1px);
+      height: 3px;
+      width: 100%;
+      left: 0;
+      &::after {
+        transform: rotate(0deg);
+      }
+    }
+  }
+}
