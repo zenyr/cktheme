@@ -95,9 +95,11 @@ class Row extends Component {
         <td className={styles.tiny}>
           <a onClick={this.handleOn} className={styles.btnColor}>
             <div className={styles.swatch} style={{ background: result }} />
-            <code>
-              {value.toLowerCase()}
-            </code>
+            {value
+              ? <code>
+                {value.toLowerCase()}
+              </code>
+              : <span className="pt-icon-standard pt-icon-exclude-row" />}
             <Button
               className="pt-minimal"
               iconName="flash"

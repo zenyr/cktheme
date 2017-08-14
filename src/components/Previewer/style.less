@@ -275,7 +275,6 @@
     line-height: 31px;
     height: 31px;
     font-size: 13px;
-    border-bottom: 1px solid red;
     .name {
       font-weight: bold;
       flex: 1;
@@ -286,12 +285,26 @@
       margin: 0 8px;
     }
   }
+  .memoRow {
+    // 글작성자 회원메모 + 본문 구분자
+    padding: 0 15px 10px;
+    border-bottom: 1px solid red;
+  }
+  .memo {
+    // 메모 공통
+    border-radius: 3px;
+    padding: 0 5px;
+    // box-shadow: inset 0 0 0 1px fade(#000, 20%);
+    font-size:12px;
+    line-height:18px;
+  }
   .text {
     padding: 15px;
     min-height: 130px;
     font-size: 13px;
     line-height: 20px;
     white-space: pre-wrap;
+
     .source {
       font-size: 12px;
       border: 1px dotted fade(#000, 20%);

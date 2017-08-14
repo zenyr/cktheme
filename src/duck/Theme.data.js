@@ -30,6 +30,8 @@ export const commentColorDefault = createAction(
 export const commentColorLow = createAction('commentColorLow', '#78D9BF');
 export const commentColorMedium = createAction('commentColorMedium', '#FFBA82');
 export const commentColorHigh = createAction('commentColorHigh', '#ED6F56');
+export const memo = createAction('memo', '');
+export const memoText = createAction('memoText', '');
 export const link = createAction('link', '#1686e9');
 export const category = createAction('category', '#B8B8B8');
 export const categoryText = createAction('categoryText', '#ffffff');
@@ -55,6 +57,8 @@ export default combineReducers({
   like: like.simpleReducer,
   link: link.simpleReducer,
   markedBackground: markedBackground.simpleReducer,
+  memo: memo.simpleReducer,
+  memoText: memoText.simpleReducer,
   name: name.simpleReducer,
   nameAuthor: nameAuthor.simpleReducer,
   paper: paper.simpleReducer,

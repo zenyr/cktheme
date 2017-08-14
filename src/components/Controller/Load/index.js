@@ -69,7 +69,14 @@ export default class LoadController extends Component {
       if (parsed) {
         map(parsed, (value, fieldName) => {
           // 1단계
-          if (fieldName === 'data') {
+          if (fieldName !== 'data') {
+            const expectedFn = Actions.Theme[fieldName];
+            if (typeof expectedFn !== 'function')
+              throw new Error(`알 수 없는 최상위 필드: ${fieldName}`);
+            if (Theme[fieldName] !== value) {
+              dispatch(expectedFn(value));
+            }
+          } else {
             // 2단계
             map(value, (innerValue, innerFieldName) => {
               const expectedFn = Actions.ThemeData[innerFieldName];
@@ -78,20 +85,13 @@ export default class LoadController extends Component {
                 !regColor.test(innerValue)
               )
                 throw new Error(
-                  `잘못된 색상 필드: ${innerFieldName} => ${innerValue}`
+                  `알 수 없는 색상 필드: ${innerFieldName} => ${innerValue}`
                 );
               if (Theme.data[innerFieldName] !== innerValue) {
                 const matchResult = innerValue.match(regColor);
                 dispatch(expectedFn(`#${matchResult[1].toLowerCase()}`));
               }
             });
-          } else {
-            const expectedFn = Actions.Theme[fieldName];
-            if (typeof expectedFn !== 'function')
-              throw new Error(`잘못된 최상위 필드: ${fieldName}`);
-            if (Theme[fieldName] !== value) {
-              dispatch(expectedFn(value));
-            }
           }
         });
       }
@@ -143,7 +143,7 @@ export default class LoadController extends Component {
             styles.textarea
           ])}
           dir="auto"
-          onChange={this.handleStage}
+          onInput={this.handleStage}
           rows={20}
           placeholder="테마 JSON 또는 공유코드를 붙여넣으세요"
           value={input}

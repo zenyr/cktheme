@@ -9,10 +9,7 @@ export default ({ colors }) =>
     >
       설레는 그들은 따뜻한 못할 희망의 위하여 자신과 것이다.
     </div>
-    <div
-      className={styles.info}
-      style={`border-bottom-color:${colors.paperLine};color:${colors.time};`}
-    >
+    <div className={styles.info} style={`color:${colors.time};`}>
       <div className={styles.name} style={`color:${colors.name};`}>
         지나가던행인65535
       </div>
@@ -20,13 +17,21 @@ export default ({ colors }) =>
       <div className={styles.div}>·</div>
       <div className={styles.count}>88</div>
     </div>
+    <div
+      className={styles.memoRow}
+      style={`border-bottom-color:${colors.paperLine};`}
+    >
+      <div
+        className={styles.memo}
+        style={`background:${colors.memo || colors.commentColorDefault};color:${colors.memoText || colors.commentText}`}
+      >
+        503 친구
+      </div>
+    </div>
     <div className={styles.text} style={`color:${colors.paperText};`}>
-      <p>피에 찬미를 커다란 보내는 얼음 풀이 그들의 아니다. 이 가진 피고 기쁘며, 얼마나 이상의 원대하고, 끓는다.</p>
       <p>
-        대한 때까지 천하를 희망의 군영과 끓는 원대하고, 이 때문이다. 길을 웅대한 그들의 이상이 것이다. 불어 같지 간에 못할 그러므로
-        굳세게 우리 타오르고 사막이다. 현저하게 품었기 인생의 할지라도 있는 든 낙원을 웅대한 것이다. 생명을 이상은 대고, 온갖
-        살았으며, 방황하였으며, 위하여서. 부패를 희망의 가슴에 꽃이 원질이 끝까지 같은 인간이 쓸쓸하랴? 피에 위하여서 커다란
-        살았으며, 유소년에게서 공자는 인생에 이상의 실현에 위하여서.
+        천지는 가진 생의 너의 힘차게 구하지 사막이다. 내는 수 웅대한 이상 오직 피다. 듣기만 실로 굳세게 기쁘며, 새 낙원을 그들에게
+        교향악이다. 하는 피는 살 새 찾아 현저하게 청춘의 같이 보는 것이다.
       </p>
       <div className={styles.source}>
         출처 :{' '}
@@ -45,7 +50,22 @@ export default ({ colors }) =>
       colors={colors}
       name="내꺼야"
       mine
-      text="피어나는 착목한는 같은 현저하게 뭇 사막이다. 무엇을 이것이야말로 싸인 쓸쓸하랴?"
+      text="이 헌법공포 당시의 국회의원의 임기는 제1항에 의한 국회의 최초의 집회일 전일까지로 한다. 정당은 법률이 정하는 바에 의하여 국가의 보호를 받으며, 국가는 법률이 정하는 바에 의하여 정당운영에 필요한 자금을 보조할 수 있다."
+      date="9/11 12:34:56"
+      like={1}
+    />
+    <Item
+      colors={colors}
+      name="사생활"
+      like={420}
+      text="모든 국민은 인간다운 생활을 할 권리를 가진다. 대한민국은 민주공화국이다. 대통령은 헌법과 법률이 정하는 바에 의하여 공무원을 임면한다. 모든 국민은 거주·이전의 자유를 가진다."
+      date="9/11 12:34:56"
+    />
+    <Item
+      colors={colors}
+      name="가라사대"
+      reply
+      text="비상계엄이 선포된 때에는 법률이 정하는 바에 의하여 영장제도, 언론·출판·집회·결사의 자유, 정부나 법원의 권한에 관하여 특별한 조치를 할 수 있다."
       date="9/11 12:34:56"
       like={1}
     />

@@ -13,6 +13,7 @@ import SimpleSlider from './SimpleSlider';
 // 2. H/S/L 변경시 hsl->rgb 조립
 // 3. R/G/B 변경시 rgb->hex 조립, color와 다르면 onChange(hex)
 // 4. OK 클릭시 onChangeComplete(hex)
+const regColor = /^#?([a-f0-9]{3}|[a-f0-9]{6})$/i;
 
 export default class HSLPicker extends Component {
   state = {
@@ -28,7 +29,12 @@ export default class HSLPicker extends Component {
   @bind
   receiveValue(rawValue) {
     const { r, g, b, initialValue } = this.state;
-    const value = rawValue ? rawValue.replace('#', '') : '000000';
+    let value = rawValue ? rawValue.replace('#', '') : '000000';
+    if (value.length === 3) {
+      value = [value[0], value[0], value[1], value[1], value[2], value[2]].join(
+        ''
+      );
+    }
     const nR = parseInt(value.substr(0, 2), 16);
     const nG = parseInt(value.substr(2, 2), 16);
     const nB = parseInt(value.substr(4, 2), 16);
@@ -104,6 +110,14 @@ export default class HSLPicker extends Component {
   @bind
   getHex(r, g, b) {
     return `#${hx(r)}${hx(g)}${hx(b)}`;
+  }
+
+  @bind
+  handleInput(ev) {
+    const { value } = ev.target;
+    if (regColor.test(value)) {
+      this.receiveValue(value);
+    }
   }
 
   @bind
@@ -221,7 +235,13 @@ export default class HSLPicker extends Component {
                     background: this.getHex(r, g, b)
                   }}
                 >
-                  {cl}
+                  {/* <input type="color" className={styles.btnColor} value={cl} /> */}
+                  <input
+                    type="text"
+                    className={styles.edtColor}
+                    value={cl}
+                    onChange={this.handleInput}
+                  />
                 </div>
                 <Button
                   iconName="tick"

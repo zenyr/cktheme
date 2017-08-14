@@ -15,21 +15,15 @@
   "eslintConfig": {
     "extends": "eslint-config-synacor",
     "rules": {
-      "indent": [
-        "warn",
-        2
-      ],
-      "brace-style": [
-        "warn",
-        "1tbs"
-      ],
-      "comma-dangle": [
-        "warn",
-        "only-multiline"
-      ],
+      "indent": ["warn", 2],
+      "brace-style": ["warn", "1tbs"],
+      "comma-dangle": ["warn", "only-multiline"],
       "react/jsx-indent-props": 0,
       "react/jsx-closing-bracket-location": 0,
       "react/prefer-stateless-function": 0
+    },
+    "globals": {
+      "idx": true
     }
   },
   "now": {
@@ -45,6 +39,7 @@
   "dependencies": {
     "@blueprintjs/core": "^1.24.0",
     "babel-plugin-async-to-promises": "^1.0.5",
+    "babel-plugin-idx": "^1.5.1",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-plugin-transform-regenerator": "^6.24.1",
     "decko": "^1.2.0",

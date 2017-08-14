@@ -10,6 +10,7 @@ export default ({ colors, toggleMode, hideBar }) =>
     style={`background:${colors.paper}`}
     onClick={toggleMode}
   >
+    {/* <div className={styles.overlay} /> */}
     <StatusBar colors={colors} />
     <Read colors={colors} />
     <div

@@ -15,8 +15,8 @@ const stateSelector = state => ({ data: state.Theme });
 export default class JSONController extends Component {
   state = {
     loose: false,
-    pretty: true,
-    base64: false,
+    pretty: false,
+    base64: true,
     presentURL: false //{ success: true, url: 'https://goo.gl/6NaoBq' }
   };
   @bind

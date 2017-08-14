@@ -5,6 +5,7 @@ export default (config, env, helpers) => {
 
     babelConfig.plugins.push('transform-flow-strip-types');
     babelConfig.plugins.push('transform-regenerator');
+    babelConfig.plugins.push('idx');
   } else {
     throw new Error('Failed to modify babel-loader');
   }

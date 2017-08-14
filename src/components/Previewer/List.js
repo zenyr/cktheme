@@ -72,7 +72,7 @@ export default ({ colors }) =>
       time="10:07"
       count={1234}
       colors={colors}
-      scrap="임차인은 현대판 소작농"
+      scrap="지체없이 국회에 보고하여 그 승인을 얻어야 한다"
     />
     <Item
       title="법관이 중대한 심신상의 장해로 직무를 수행할 수 없을 때에는 법률이 정하는 바에 의하여 퇴직하게 할 수 ..."
