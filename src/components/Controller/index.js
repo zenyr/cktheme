@@ -5,6 +5,7 @@ import InfoController from 'async!./Info';
 import LoadController from 'async!./Load';
 import EditController from 'async!./Edit';
 import JSONController from 'async!./JSON';
+import HistoryController from 'async!./History';
 import { cz } from '../../lib/util';
 
 // 미리보기
@@ -35,6 +36,11 @@ export default class Controller extends Component {
           id="export"
           title={<span className="pt-icon-large pt-icon-box" />}
           panel={<JSONController />}
+        />
+        <Tab2
+          id="history"
+          title={<span className="pt-icon-large pt-icon-git-commit" />}
+          panel={<HistoryController />}
         />
         <Tabs2.Expander />
         <Switch checked={float} onChange={toggleFloat}>
