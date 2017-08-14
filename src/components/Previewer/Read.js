@@ -25,7 +25,7 @@ export default ({ colors }) =>
         className={styles.memo}
         style={`background:${colors.memo || colors.commentColorDefault};color:${colors.memoText || colors.commentText}`}
       >
-        503 친구
+        그 여름의 바다로
       </div>
     </div>
     <div className={styles.text} style={`color:${colors.paperText};`}>
@@ -57,7 +57,6 @@ export default ({ colors }) =>
     <Item
       colors={colors}
       name="사생활"
-      like={420}
       text="모든 국민은 인간다운 생활을 할 권리를 가진다. 대한민국은 민주공화국이다. 대통령은 헌법과 법률이 정하는 바에 의하여 공무원을 임면한다. 모든 국민은 거주·이전의 자유를 가진다."
       date="9/11 12:34:56"
     />
@@ -68,6 +67,7 @@ export default ({ colors }) =>
       text="비상계엄이 선포된 때에는 법률이 정하는 바에 의하여 영장제도, 언론·출판·집회·결사의 자유, 정부나 법원의 권한에 관하여 특별한 조치를 할 수 있다."
       date="9/11 12:34:56"
       like={1}
+      memo="우리는 모두 혼자였다"
     />
     <Item
       colors={colors}

@@ -284,11 +284,11 @@
     .div {
       margin: 0 8px;
     }
-  }
-  .memoRow {
-    // 글작성자 회원메모 + 본문 구분자
-    padding: 0 15px 10px;
-    border-bottom: 1px solid red;
+    + .memoRow {
+      // 글작성자 회원메모 + 본문 구분자
+      padding: 0 15px 10px;
+      border-bottom: 1px solid red;
+    }
   }
   .memo {
     // 메모 공통
@@ -331,6 +331,10 @@
       // 댓글작성중
       outline: 2px solid fade(#000, 20%);
       outline-offset: -5px;
+    }
+    .memoRow {
+      // 코멘작성자 회원메모 + 본문 구분자
+      padding: 0;
     }
     .topRow {
       display: flex;

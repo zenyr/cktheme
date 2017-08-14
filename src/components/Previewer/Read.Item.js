@@ -10,6 +10,7 @@ export default class Item extends Component {
     text,
     like,
     mine,
+    memo,
     owner,
     marked,
     author,
@@ -28,7 +29,21 @@ export default class Item extends Component {
           ? `padding-left:40px;`
           : ''};`}
       >
-        <div className={styles.topRow} style={`font-weight:${owner ? 'bold' : 'normal'}`}>
+        {!!memo &&
+          <div className={styles.memoRow}>
+            <span
+              className={styles.memo}
+              style={`background:${colors.memo ||
+                colors.commentColorDefault};color:${colors.memoText ||
+                colors.commentText}`}
+            >
+              {memo}
+            </span>
+          </div>}
+        <div
+          className={styles.topRow}
+          style={`font-weight:${owner ? 'bold' : 'normal'}`}
+        >
           <div
             className={styles.name}
             style={`color:${owner ? colors.nameAuthor : colors.name};`}
