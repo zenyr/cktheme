@@ -104,14 +104,25 @@ export default class JSONController extends Component {
     return '';
   }
 
+  filterData(data) {
+    const result = { ...data, data: { ...data.data } };
+    Object.keys(result.data).map(fieldName => {
+      if (!result.data[fieldName]) {
+        delete result.data[fieldName];
+      }
+    });
+    return result;
+  }
+
   componentWillUnmount() {
     this._dead = true;
   }
 
   render({ data }, { loose, pretty, base64, presentURL }) {
+    const filteredData = this.filterData(data);
     let result = loose
-      ? Json5.stringify(data, null, pretty ? 2 : 0)
-      : JSON.stringify(data, null, pretty ? 2 : 0);
+      ? Json5.stringify(filteredData, null, pretty ? 2 : 0)
+      : JSON.stringify(filteredData, null, pretty ? 2 : 0);
     const btoa = Base64.encode;
     if (base64 && btoa) result = btoa(result);
     const editLinkURL = this.getEditLink(result);

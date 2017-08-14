@@ -1,4 +1,4 @@
-import { h, Component } from 'preact';
+import { Component } from 'preact';
 import styles from '../style.less';
 import map from 'lodash-es/map';
 import { bind, debounce } from 'decko';
@@ -95,11 +95,9 @@ class Row extends Component {
         <td className={styles.tiny}>
           <a onClick={this.handleOn} className={styles.btnColor}>
             <div className={styles.swatch} style={{ background: result }} />
-            {value
-              ? <code>
-                {value.toLowerCase()}
-              </code>
-              : <span className="pt-icon-standard pt-icon-exclude-row" />}
+            <code>
+              {value.toLowerCase() || 'transparent'}
+            </code>
             <Button
               className="pt-minimal"
               iconName="flash"

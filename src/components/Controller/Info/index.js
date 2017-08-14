@@ -1,4 +1,4 @@
-import { h, Component } from 'preact';
+import { Component } from 'preact';
 import styles from '../style.less';
 import { Switch, InputGroup, Button } from '@blueprintjs/core';
 import { bind } from 'decko';
