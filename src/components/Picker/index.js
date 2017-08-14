@@ -121,6 +121,14 @@ export default class HSLPicker extends Component {
   }
 
   @bind
+  handleInputClick(ev) {
+    const { target } = ev;
+    idx(target, _ => _.target.select());
+    idx(target, _ => _.target.selectAll());
+    idx(target, _ => _.target.focus());
+  }
+
+  @bind
   handleUndo() {
     this.receiveValue(this.state.initialValue);
     this.reportValue(this.state.initialValue);
@@ -240,6 +248,7 @@ export default class HSLPicker extends Component {
                     type="text"
                     className={styles.edtColor}
                     value={cl}
+                    onClick={this.handleInputClick}
                     onChange={this.handleInput}
                   />
                 </div>
