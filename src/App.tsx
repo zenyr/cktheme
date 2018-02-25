@@ -4,18 +4,22 @@ import { BrowserRouter } from 'react-router-dom';
 import Header from 'comp/GNB';
 import Views from 'views';
 import { Route } from 'react-router';
+import { store } from 'duck';
+import { Provider } from 'react-redux';
 
 class App extends React.Component {
   render() {
     return (
-      <BrowserRouter>
-        <div className={s.app}>
-          <Route render={p => <Header className={s.top} {...p} />} />
-          <div className={s.content}>
-            <Views />
+      <Provider store={store}>
+        <BrowserRouter>
+          <div className={s.app}>
+            <Route render={p => <Header className={s.top} {...p} />} />
+            <div className={s.content}>
+              <Views />
+            </div>
           </div>
-        </div>
-      </BrowserRouter>
+        </BrowserRouter>
+      </Provider>
     );
   }
 }
