@@ -1,4 +1,6 @@
-enum ActionTypes {
+import { actionize } from '../utils';
+
+const enum ActionTypes {
   ID = 'CK/THEME/INFO/ID',
   NAME = 'CK/THEME/INFO/NAME',
   DARK = 'CK/THEME/INFO/DARK',
@@ -16,24 +18,32 @@ const initialState: State = {
   name: 'My awesome theme',
   dark: false,
 };
+
 // Action
-type ThemeInfoIdSet = Action<ActionTypes.ID, string>;
-type Actions = ThemeInfoIdSet;
+interface ThemeInfo {
+  Reset: Action<ActionTypes.RESET, string>;
+  IdSet: Action<ActionTypes.ID, string>;
+  NameSet: Action<ActionTypes.NAME, string>;
+  DarkSet: Action<ActionTypes.DARK, boolean>;
+}
+type Actions = ThemeInfo[keyof ThemeInfo];
 // ActionCreator
 export const actions = {
-  themeInfoIdSet: (payload: string): ThemeInfoIdSet => ({
-    type: ActionTypes.ID,
-    payload,
-  }),
+  themeInfoReset: actionize<ThemeInfo['Reset']>(ActionTypes.RESET),
+  themeInfoIdSet: actionize<ThemeInfo['IdSet']>(ActionTypes.ID),
+  themeInfoNameSet: actionize<ThemeInfo['NameSet']>(ActionTypes.NAME),
+  themeInfoDarkSet: actionize<ThemeInfo['DarkSet']>(ActionTypes.DARK),
 };
 // Reducer
-export const reducer: Reducer<State, Actions> = (  state = initialState,  action) => {
-  const { payload } = action;
+export const reducer: Reducer<State, Actions> = (
+  state = initialState,
+  action
+): State => {
   if (action.type === ActionTypes.ID) {
-    return {
-      ...state,
-      ID: payload,
-    };
+    return { ...state, id: action.payload };
+  }
+  if (action.type === ActionTypes.NAME) {
+    return { ...state, name: action.payload };
   }
   return state;
 };

@@ -5,8 +5,13 @@ import {
   actions as themeActions,
   State as ThemeState,
 } from './theme';
+import {
+  reducer as uiReducer,
+  actions as uiActions,
+  State as UiState,
+} from './ui';
 
-const reducer = combineReducers({ theme: themeReducer });
+const reducer = combineReducers({ theme: themeReducer, ui: uiReducer });
 
 export const store = createStore(
   reducer,
@@ -16,8 +21,10 @@ export const store = createStore(
 
 export const actions = {
   ...themeActions,
+  ...uiActions,
 };
 
 export type ReduxState = {
   theme: ThemeState;
+  ui: UiState;
 };
