@@ -5,7 +5,7 @@ enum ActionTypes {
   RESET = 'CK/THEME/INFO/RESET',
 }
 
-type State = {
+export type State = {
   id: string; // 'mytheme'
   name: string; // 'My awesome theme'
   dark: boolean; // false

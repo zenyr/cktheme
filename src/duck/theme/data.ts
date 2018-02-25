@@ -5,7 +5,7 @@ enum ActionTypes {
   REDO = 'CK/THEME/DATA/REDO',
 }
 
-type State = ThemeData & {
+export type State = ThemeData & {
   history: SetParams[];
   historyIdx: number;
 };

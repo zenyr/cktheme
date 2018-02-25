@@ -1,6 +1,10 @@
 import { createStore, combineReducers } from 'redux';
 
-import { reducer as themeReducer, actions as themeActions } from './theme';
+import {
+  reducer as themeReducer,
+  actions as themeActions,
+  State as ThemeState,
+} from './theme';
 
 const reducer = combineReducers({ theme: themeReducer });
 
@@ -12,4 +16,8 @@ export const store = createStore(
 
 export const actions = {
   ...themeActions,
+};
+
+export type ReduxState = {
+  theme: ThemeState;
 };
