@@ -124,6 +124,11 @@ module.exports = {
         include: paths.appSrc,
       },
       {
+        test: /\.[tj]sx?$/,
+        include: paths.appSrc,
+        use: [{ loader: require.resolve('babel-loader') }],
+      },
+      {
         // "oneOf" will traverse all following loaders until one will
         // match the requirements. When no loader matches it will fall
         // back to the "file" loader at the end of the loader list.
@@ -139,19 +144,45 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
+
           // Compile .tsx?
           {
             test: /\.(ts|tsx)$/,
             include: paths.appSrc,
             use: [
               {
-                loader: require.resolve('babel-loader'),
-              },
-              {
                 loader: require.resolve('ts-loader'),
                 options: {
                   // disable type checker - we will use it in fork plugin
                   transpileOnly: true,
+                },
+              },
+            ],
+          },
+          {
+            // external css
+            test: /\.css$/,
+            include: paths.appNodeModules,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  // Necessary for external CSS imports to work
+                  // https://github.com/facebookincubator/create-react-app/issues/2677
+                  ident: 'postcss',
+                  plugins: () => [
+                    require('postcss-flexbugs-fixes'),
+                    autoprefixer({
+                      browsers: [
+                        '>1%',
+                        'last 4 versions',
+                        'Firefox ESR',
+                        'not ie < 9', // React doesn't support IE8 anyway
+                      ],
+                      flexbox: 'no-2009',
+                    }),
+                  ],
                 },
               },
             ],
@@ -166,10 +197,8 @@ module.exports = {
             use: [
               require.resolve('style-loader'),
               {
-                loader: require.resolve('css-loader'),
-                options: {
-                  importLoaders: 1,
-                },
+                loader: require.resolve('typings-for-css-modules-loader'),
+                options: { importLoaders: 1, modules: true },
               },
               {
                 loader: require.resolve('postcss-loader'),
@@ -216,6 +245,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.WatchIgnorePlugin([/css\.d\.ts$/]),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">

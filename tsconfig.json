@@ -9,10 +9,12 @@
     "jsx": "preserve",
     "moduleResolution": "node",
     "rootDir": "src",
+    "baseUrl": "src",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true

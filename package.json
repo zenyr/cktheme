@@ -55,12 +55,18 @@
     "@types/react": "^16.0.38",
     "@types/react-addons-css-transition-group": "^15.0.4",
     "@types/react-dom": "^16.0.4",
+    "@types/react-router": "^4.0.22",
     "babel-loader": "^8.0.0-beta.0",
-    "typescript": "^2.7.2"
+    "typescript": "^2.7.2",
+    "typings-for-css-modules-loader": "sarink/typings-for-css-modules-loader#4ba358d"
   },
   "jest": {
-    "collectCoverageFrom": ["src/**/*.{js,jsx,ts,tsx}"],
-    "setupFiles": ["<rootDir>/config/polyfills.js"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.ts?(x)",
       "<rootDir>/src/**/?(*.)(spec|test).ts?(x)"
@@ -70,8 +76,7 @@
     "transform": {
       "^.+\\.tsx?$": "<rootDir>/config/jest/typescriptTransform.js",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)":
-        "<rootDir>/config/jest/fileTransform.js"
+      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
@@ -94,8 +99,7 @@
     ],
     "globals": {
       "ts-jest": {
-        "tsConfigFile":
-          "/Users/zenyr/ResilioSync/webWorks/cktheme/tsconfig.test.json"
+        "tsConfigFile": "/Users/zenyr/ResilioSync/webWorks/cktheme/tsconfig.test.json"
       }
     }
   }
