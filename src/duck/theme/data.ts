@@ -1,40 +1,18 @@
 enum ActionTypes {
   SET = 'CK/THEME/DATA/SET',
   RESET = 'CK/THEME/DATA/RESET',
+  UNDO = 'CK/THEME/DATA/UNDO',
+  REDO = 'CK/THEME/DATA/REDO',
 }
 
-type State = {
-  barColor: string; // #7ea8bf
-  barText: string; // #ffffff
-  category: string; // #B8B8B8
-  categoryText: string; // #ffffff
-  commentColorDefault: string; // #B8B8B8
-  commentColorHigh: string; // #ED6F56
-  commentColorLow: string; // #78D9BF
-  commentColorMedium: string; // #FFBA82
-  commentText: string; // #ffffff
-  highlightedBackground: string; // #dceef1
-  highlightedText: string; // #000000
-  like: string; // #ED6F56
-  link: string; // #1686e9
-  markedBackground: string; // #f6f4d0
-  name: string; // #425060
-  nameAuthor: string; // #A651BD
-  paper: string; // #EFEEE7
-  paperAlt: string; // #EAEAE7
-  paperAltText: string; // #B8B8B8
-  paperLine: string; // #BFBEB8
-  paperText: string; // #000000
-  primaryAltText: string; // #CCCCCC
-  primaryBackground: string; // #425060
-  primaryText: string; // #dbdce1
-  scrap: string; // #A651BD
-  statusBackground: string; // #425060
-  statusText: string; // #dbdce1
-  time: string; // #afaea5
+type State = ThemeData & {
+  history: SetParams[];
+  historyIdx: number;
 };
 
 const initialState: State = {
+  history: [],
+  historyIdx: -1,
   barColor: '#7ea8bf',
   barText: '#ffffff',
   category: '#B8B8B8',
@@ -65,11 +43,13 @@ const initialState: State = {
   time: '#afaea5',
 };
 // Action
-type SetParams = { field: keyof State; value: string };
-type ResetParams = { field: keyof State };
+type SetParams = { field: keyof ThemeData; value: string };
+type ResetParams = { field: keyof ThemeData };
 type ThemeDataSet = Action<ActionTypes.SET, SetParams>;
 type ThemeDataReset = Action<ActionTypes.RESET, ResetParams>;
-type Actions = ThemeDataSet | ThemeDataReset;
+type ThemeDataUndo = Action<ActionTypes.UNDO>;
+type ThemeDataRedo = Action<ActionTypes.REDO>;
+type Actions = ThemeDataSet | ThemeDataReset | ThemeDataUndo | ThemeDataRedo;
 // ActionCreator
 export const actions = {
   themeDataSet: (payload: SetParams): ThemeDataSet => ({
@@ -86,19 +66,40 @@ export const reducer: Reducer<State, Actions> = (
   state = initialState,
   action
 ) => {
-  if (action.type === ActionTypes.SET) {
-    const { field, value } = action.payload;
-    return {
-      ...state,
-      [field]: value,
-    };
-  }
-  if (action.type === ActionTypes.RESET) {
+  if (action.type === ActionTypes.SET || action.type === ActionTypes.RESET) {
     const { field } = action.payload;
-    return {
-      ...state,
-      [field]: initialState[field],
-    };
+    const oldValue = state[field];
+    if (
+      action.type === ActionTypes.RESET ||
+      action.payload.value !== oldValue
+    ) {
+      // save history
+      const history = [...state.history, { field, value: oldValue }];
+      const historyIdx = history.length - 1;
+      return {
+        ...state,
+        history,
+        historyIdx,
+        [field]:
+          action.type === ActionTypes.RESET
+            ? initialState[field]
+            : action.payload.value,
+      };
+    }
+  }
+  if (action.type === ActionTypes.UNDO || action.type === ActionTypes.REDO) {
+    // overwrite by history index
+    const isBackward = action.type === ActionTypes.UNDO;
+    const { history, historyIdx } = state;
+    const nextIdx = historyIdx + (isBackward ? -1 : 0);
+    const nextData = history[nextIdx];
+    if (nextData) {
+      return {
+        ...state,
+        historyIdx: nextIdx,
+        [nextData.field]: nextData.value,
+      };
+    }
   }
   return state;
 };
