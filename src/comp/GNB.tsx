@@ -1,33 +1,28 @@
 import React, { Component } from 'react';
 import {
   Alignment,
-  Button,
   Navbar,
   NavbarDivider,
   NavbarGroup,
-  NavbarHeading,
 } from '@blueprintjs/core';
 import { RouteComponentProps } from 'react-router';
+import BtnLink from 'comp/BtnLink';
 // Header comp
-const LinkBtn = ({ history, to, icon, text }) => (
-  <Button
-    onClick={() => history.push(to)}
-    className="pt-minimal"
-    icon={icon}
-    text={text}
-  />
-);
 type Props = RouteComponentProps<{}> & { className: string };
 export default class Header extends Component<Props> {
   render() {
-    const { className, history } = this.props;
+    const { className } = this.props;
     return (
       <Navbar className={className + ' pt-fixed-top'}>
         <NavbarGroup align={Alignment.LEFT}>
-          <NavbarHeading>CkTheme 3</NavbarHeading>
+          <BtnLink to="/" icon="home" text="CkTheme 3 " minimal={true}>
+            {/* <NavbarHeading>CkTheme 3</NavbarHeading> */}
+          </BtnLink>
           <NavbarDivider />
-          <LinkBtn history={history} to="/" icon="home" text="Home" />
-          <LinkBtn history={history} to="/test" icon="document" text="Files" />
+          <BtnLink to="/code" icon="barcode" text="code" minimal={true} />
+          <BtnLink to="/info" icon="annotation" text="Info" minimal={true} />
+          <BtnLink to="/edit" icon="tint" text="Edit" minimal={true} />
+          <BtnLink to="/export" icon="export" text="Export" minimal={true} />
         </NavbarGroup>
       </Navbar>
     );
